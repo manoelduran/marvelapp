@@ -23,14 +23,15 @@ export function Home() {
     return (
         <Container>
             <Header>
-                <Title>BORA INICIAR O APP</Title>
+                <Title>Marvel Land</Title>
             </Header>
             <FlatList
                 data={characters}
-                keyExtractor={item => item.name}
-                renderItem={({ item }) =>
+                keyExtractor={item => String(item.id)}
+                renderItem={({ item, index }) =>
                 (
                     <CharacterCard
+                        index={index}
                         data={item}
                     />
                 )
