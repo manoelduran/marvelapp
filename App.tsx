@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, Poppins_400Regular, Poppins_500Medium } from '@expo-google-fonts/poppins';
 import React from 'react';
-
-import { View } from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { SignIn } from '@screens/SignIn';
+import { ThemeProvider } from 'styled-components/native';
+import theme from './src/theme';
+import { Routes } from './src/routes';
 
 
 export default function App() {
@@ -15,13 +15,11 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />
   }
- 
+
   return (
-    <View>
-      <StatusBar
-        translucent
-      />
-      <SignIn />
-    </View>
+    <ThemeProvider theme={theme}>
+      <StatusBar style='light' translucent backgroundColor='transparent' />
+      <Routes />
+    </ThemeProvider>
   );
 }
