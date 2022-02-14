@@ -7,19 +7,25 @@ import {
     Title
 } from './styles';
 import { GetCharacters } from '../../services/api';
+import { useNavigation } from '@react-navigation/native';
 
 
 export function Home() {
+    const navigation = useNavigation();
     const [characters, setCharacters] = useState<Character[]>([]);
-
+    function handleCharacter(id: string) {
+        navigation.navigate('Character', {
+            id
+        })
+    }
     useEffect(() => {
         async function fetchCharacters() {
             const response = await GetCharacters();
             const listofCharacters = response.data.results;
-            setCharacters(listofCharacters)
-        }
-        fetchCharacters()
-    }, [])
+            setCharacters(listofCharacters);
+        };
+        fetchCharacters();
+    }, []);
     return (
         <Container>
             <Header>
@@ -33,6 +39,7 @@ export function Home() {
                     <CharacterCard
                         index={index}
                         data={item}
+                        onPress={() => handleCharacter(String(item.id))}
                     />
                 )
                 }
