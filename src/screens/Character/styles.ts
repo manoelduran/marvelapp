@@ -11,12 +11,14 @@ export const Header = styled(LinearGradient).attrs(({ theme }) => ({
     colors: theme.COLORS.GRADIENT
 }))`
 width: 100%;
-padding: ${getStatusBarHeight() + 33}px 0 24px;
+flex-direction: row;
+justify-content: flex-start;
+padding: ${getStatusBarHeight() + 33}px 24px 24px;
 `;
 
 export const Title = styled.Text`
 font-size: 24px;
-text-align: center;
+margin-left: 45px;
 ${({ theme }) => css`
 font-family: ${theme.FONTS.TITLE};
 color: ${theme.COLORS.TITLE};

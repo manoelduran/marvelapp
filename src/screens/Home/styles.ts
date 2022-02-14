@@ -12,7 +12,7 @@ export const Header = styled(LinearGradient).attrs(({ theme }) => ({
     colors: theme.COLORS.GRADIENT
 }))`
 width: 100%;
-padding: ${getStatusBarHeight() + 33}px 0 24px;
+padding: ${getStatusBarHeight() + 33}px 24px 24px;
 `;
 
 export const Title = styled.Text`
