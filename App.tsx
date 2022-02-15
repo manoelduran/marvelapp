@@ -1,10 +1,11 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, Poppins_400Regular, Poppins_500Medium } from '@expo-google-fonts/poppins';
-import React from 'react';
 import AppLoading from 'expo-app-loading';
-import { ThemeProvider } from 'styled-components/native';
 import theme from './src/theme';
+import { ThemeProvider } from 'styled-components/native';
 import { Routes } from './src/routes';
+import { AuthProvider } from '@hooks/useAuth';
 
 
 export default function App() {
@@ -19,7 +20,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style='light' translucent backgroundColor='transparent' />
+      <AuthProvider>
       <Routes />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
