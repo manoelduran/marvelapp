@@ -24,3 +24,27 @@ font-family: ${theme.FONTS.TITLE};
 color: ${theme.COLORS.TITLE};
 `}
 `;
+
+export const Content = styled.View`
+width: 100%;
+margin-top: 24px;
+padding:  0 24px;
+background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
+`;
+
+export const Thumbnail = styled.Image`
+align-self: center;
+width: 240px;
+height: 240px;
+border-radius: 120px;
+`;
+
+export const Name = styled.Text`
+text-align: center;
+font-size: 24px;
+margin-top: 24px;
+${({ theme }) => css`
+font-family: ${theme.FONTS.TITLE};
+color: ${theme.COLORS.SUCCESS_900};
+`}
+`;

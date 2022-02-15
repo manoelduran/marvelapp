@@ -1,36 +1,60 @@
-import { CharacterCard } from '@components/CharacterCard';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { GetCharacters, searchCharacter } from '../../services/api';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { Search } from '@components/Search';
+import { CharacterCard } from '@components/CharacterCard';
 import {
     Container,
     Header,
     Title
 } from './styles';
-import { GetCharacters } from '../../services/api';
-import { useNavigation } from '@react-navigation/native';
+
 
 
 export function Home() {
     const navigation = useNavigation();
     const [characters, setCharacters] = useState<Character[]>([]);
-    function handleCharacter(id: string) {
-        navigation.navigate('Character', {
-            id
-        })
+    const [search, setSearch] = useState('');
+    async function fetchCharacters() {
+        const response = await GetCharacters();
+        const listofCharacters = response.data.results;
+        setCharacters(listofCharacters);
+    };
+    async function handleSearch() {
+        const response = await searchCharacter(search);
+        console.log(response.data.results);
+        setCharacters(response.data.results);
     }
+    async function handleDelete() {
+        setSearch('');
+        const response = await GetCharacters();
+        const listofCharacters = response.data.results;
+        setCharacters(listofCharacters);
+    }
+    function handleCharacter(character: Character) {
+        navigation.navigate('Character', {
+            character
+        });
+    };
     useEffect(() => {
-        async function fetchCharacters() {
-            const response = await GetCharacters();
-            const listofCharacters = response.data.results;
-            setCharacters(listofCharacters);
+        if (search) {
+            handleSearch();
+        } else {
+            fetchCharacters();
         };
-        fetchCharacters();
-    }, []);
+    }, [search]);
     return (
         <Container>
             <Header>
                 <Title>Marvel Land</Title>
             </Header>
+            <Search
+                value={search}
+                onChangeText={setSearch}
+                onSearch={handleSearch}
+                onClear={handleDelete}
+            />
             <FlatList
                 data={characters}
                 keyExtractor={item => String(item.id)}
@@ -39,7 +63,7 @@ export function Home() {
                     <CharacterCard
                         index={index}
                         data={item}
-                        onPress={() => handleCharacter(String(item.id))}
+                        onPress={() => handleCharacter(item)}
                     />
                 )
                 }

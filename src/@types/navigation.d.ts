@@ -1,5 +1,5 @@
 export type CharacterNavigationProps = {
-    id?: string;
+    character: Character;
 }
 
 export declare global {
