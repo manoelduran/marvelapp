@@ -23,6 +23,7 @@ export function Home() {
     };
     async function handleSearch() {
         const response = await searchCharacter(search);
+
         setCharacters(response.data.results);
     }
     async function handleDelete() {
@@ -67,7 +68,7 @@ export function Home() {
                 )
                 }
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 125 }}
+                contentContainerStyle={{ paddingHorizontal: 24 }}
             />
         </Container>
     );

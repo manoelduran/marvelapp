@@ -47,7 +47,7 @@ export function SignIn() {
                     <ForgotPasswordButton onPress={handleForgotPassword}>
                         <ForgotPasswordLabel>Esqueci minha senha</ForgotPasswordLabel>
                     </ForgotPasswordButton>
-                    <Button title='Conectar' type='primary' onPress={handleSignIn} isLoading={false} />
+                    <Button title='Conectar' onPress={handleSignIn} isLoading={false} />
                 </Content>
             </KeyboardAvoidingView>
         </Container>

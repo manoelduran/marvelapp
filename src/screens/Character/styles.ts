@@ -48,3 +48,12 @@ font-family: ${theme.FONTS.TITLE};
 color: ${theme.COLORS.SUCCESS_900};
 `}
 `;
+
+export const Description = styled.Text`
+font-size: 14px;
+margin-top: 11px;
+${({ theme }) => css`
+font-family: ${theme.FONTS.TEXT};
+color: ${theme.COLORS.SECONDARY_400};
+`}
+`;

@@ -8,9 +8,11 @@ import {
     Title,
     Content,
     Thumbnail,
-    Name
+    Name,
+    Description
 } from './styles';
 import { useTheme } from 'styled-components/native';
+import { ItemSeparator } from '@components/ItemSeparator';
 
 
 
@@ -24,7 +26,7 @@ export function Character() {
     function handleBack() {
         navigation.goBack();
     };
-     function fetchCharacter() {
+    function fetchCharacter() {
         setSelectedCharacter(character)
     }
     useEffect(() => {
@@ -36,13 +38,15 @@ export function Character() {
                 <BackButton
                     onPress={handleBack}
                 />
-                <Title>Marvel Land</Title>
+                <Title>Marvel Land </Title>
             </Header>
             <Content>
                 <Thumbnail
-                    source={{ uri: `${character?.thumbnail?.path}/portrait_incredible.${character?.thumbnail?.extension}` }}
+                    source={{ uri: `${selectedCharacter?.thumbnail?.path}/portrait_incredible.${selectedCharacter?.thumbnail?.extension}` }}
                 />
-                <Name> {character.name} </Name>
+                <Name> {selectedCharacter.name} </Name>
+                <ItemSeparator />
+                <Description> {selectedCharacter.description} </Description>
             </Content>
         </Container>
     );
