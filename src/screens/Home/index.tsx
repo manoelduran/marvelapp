@@ -23,7 +23,6 @@ export function Home() {
     };
     async function handleSearch() {
         const response = await searchCharacter(search);
-        console.log(response.data.results);
         setCharacters(response.data.results);
     }
     async function handleDelete() {
@@ -43,7 +42,7 @@ export function Home() {
         } else {
             fetchCharacters();
         };
-    }, [search]);
+    }, []);
     return (
         <Container>
             <Header>

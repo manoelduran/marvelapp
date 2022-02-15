@@ -24,7 +24,7 @@ export function Character() {
     function handleBack() {
         navigation.goBack();
     };
-    async function fetchCharacter() {
+     function fetchCharacter() {
         setSelectedCharacter(character)
     }
     useEffect(() => {

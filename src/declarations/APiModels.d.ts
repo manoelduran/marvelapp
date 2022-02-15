@@ -14,7 +14,7 @@ interface Character {
         path: string,
         extension: string
     },
-}
+};
 
 interface Characters {
     code: number,
@@ -29,4 +29,19 @@ interface Characters {
         count: number,
         results: Character[]
     }
-}
+};
+
+interface CharacterFirebase {
+    name: string,
+    description: string,
+    thumbnail: {
+        path: string,
+        extension: string
+    },
+};
+
+interface User {
+    id: string;
+    name: string;
+    isAdmin: boolean;
+};
