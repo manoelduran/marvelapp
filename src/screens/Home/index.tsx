@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { GetCharacters, searchCharacter } from '../../services/api';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@hooks/useAuth';
 import { Search } from '@components/Search';
 import { CharacterCard } from '@components/CharacterCard';
+import { LogoutButton } from '@components/LogoutButton';
 import {
     Container,
     Header,
@@ -12,8 +14,11 @@ import {
 
 
 
+
+
 export function Home() {
     const navigation = useNavigation();
+    const { signOut } = useAuth();
     const [characters, setCharacters] = useState<Character[]>([]);
     const [search, setSearch] = useState('');
     async function fetchCharacters() {
@@ -25,7 +30,10 @@ export function Home() {
         const response = await searchCharacter(search);
 
         setCharacters(response.data.results);
-    }
+    };
+    async function handleSignOut() {
+        await signOut();
+    };
     async function handleDelete() {
         setSearch('');
         const response = await GetCharacters();
@@ -48,6 +56,7 @@ export function Home() {
         <Container>
             <Header>
                 <Title>Marvel Land</Title>
+                <LogoutButton onPress={handleSignOut} />
             </Header>
             <Search
                 value={search}

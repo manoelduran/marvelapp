@@ -12,6 +12,9 @@ export const Header = styled(LinearGradient).attrs(({ theme }) => ({
     colors: theme.COLORS.GRADIENT
 }))`
 width: 100%;
+flex-direction: row;
+align-items: center;
+justify-content: center;
 padding: ${getStatusBarHeight() + 33}px 24px 24px;
 `;
 
