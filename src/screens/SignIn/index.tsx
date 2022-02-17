@@ -18,18 +18,17 @@ import {
 
 
 export function SignIn() {
-    const {signIn} = useAuth();
+    const { signIn, createAccount, forgotPassword } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    async function handleSignIn() {
-      if(!email){
-          return Alert.alert('Login', 'Favor ')
-      }
+    function handleSignIn() {
+        signIn(email, password);
     };
     function handleCreateAccount() {
-
+        createAccount(email, password);
     };
     function handleForgotPassword() {
+        forgotPassword(email);
     };
     return (
         <Container>
@@ -49,13 +48,13 @@ export function SignIn() {
                         secureTextEntry
                     />
                     <FooterContainer>
-                    <CreateAccount onPress={handleCreateAccount} >
-                        <CreateAccountLabel>Criar conta</CreateAccountLabel>
-                    </CreateAccount>
-                    <ForgotPasswordButton onPress={handleForgotPassword}>
-                        <ForgotPasswordLabel>Esqueci minha senha</ForgotPasswordLabel>
-                    </ForgotPasswordButton>
-                        </FooterContainer>
+                        <CreateAccount onPress={handleCreateAccount} >
+                            <CreateAccountLabel>Criar conta</CreateAccountLabel>
+                        </CreateAccount>
+                        <ForgotPasswordButton onPress={handleForgotPassword}>
+                            <ForgotPasswordLabel>Esqueci minha senha</ForgotPasswordLabel>
+                        </ForgotPasswordButton>
+                    </FooterContainer>
                     <Button title='Conectar' onPress={handleSignIn} isLoading={false} />
                 </Content>
             </KeyboardAvoidingView>

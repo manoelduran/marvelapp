@@ -14,8 +14,8 @@ interface AuthContextData {
     signIn: (email: string, password: string) => Promise<void>;
     loadUser: () => Promise<void>;
     signOut: () => Promise<void>;
-    createAccount: () => Promise<void>;
-    forgotPassword: () => Promise<void>;
+    createAccount: (email: string, password: string) => Promise<void>;
+    forgotPassword: (email: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -34,12 +34,11 @@ function AuthProvider({ children }: AuthProviderProps) {
             .then(account => {
                 firestore()
                     .collection('users')
-                    .doc(account.user.uid)
+                    .doc(email)
                     .get()
                     .then(async (profile) => {
                         const { name, isAdmin } = profile.data() as User;
                         if (profile.exists) {
-                            ;
                             const userData = {
                                 id: account.user.uid,
                                 name,
@@ -68,21 +67,53 @@ function AuthProvider({ children }: AuthProviderProps) {
             .signOut();
         await removeItem();
         setUser(null);
-    }
-    async function createAccount() {
-
-    }
+    };
+    async function createAccount(email: string, password: string) {
+        await auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(account => {
+                firestore()
+                    .collection('users')
+                    .doc(email)
+                    .set({
+                        id: account.user.uid,
+                        isAdmin: false,
+                        name: email,
+                        password: password
+                    })
+                    .then(() => {
+                        return Alert.alert('Create Account', 'Conta criada com sucesso')
+                    })
+                    .catch(() => {
+                        return Alert.alert('Create Account', 'Erro ao tentar criar conta')
+                    })
+            })
+    };
     async function loadUser() {
-
-    }
-    async function forgotPassword() {
-
-    }
+        const userCollection = await getItem();
+        if (userCollection) {
+            const parsedUser = await JSON.parse(userCollection) as User;
+            setUser(parsedUser);
+        };
+    };
+    async function forgotPassword(email: string) {
+        if (!email) {
+            return Alert.alert('Reset Password', 'Informe o E-mail');
+        };
+        auth()
+            .sendPasswordResetEmail(email)
+            .then(() => {
+                return Alert.alert('Reset Password', 'Foi enviado um E-mail com o link para redefinição de senha no seu E-mail.');
+            })
+            .catch(() => {
+                return Alert.alert('Reset Password', 'Não foi possivel enviar o E-mail');
+            });
+    };
     useEffect(() => {
         loadUser();
-    }, [])
+    }, []);
     return (
-        <AuthContext.Provider value={{ loading,createAccount, forgotPassword, loadUser, signIn, signOut, user }} >
+        <AuthContext.Provider value={{ loading, createAccount, forgotPassword, loadUser, signIn, signOut, user }} >
             {children}
         </AuthContext.Provider>
     );
