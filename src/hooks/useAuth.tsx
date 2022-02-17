@@ -45,6 +45,7 @@ function AuthProvider({ children }: AuthProviderProps) {
                                 isAdmin
                             };
                             await setItem(JSON.stringify(userData));
+                            console.log(userData);
                             setUser(userData);
                         };
                     })

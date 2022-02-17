@@ -46,7 +46,12 @@ export function Character() {
                 />
                 <Name> {selectedCharacter.name} </Name>
                 <ItemSeparator />
-                <Description> {selectedCharacter.description} </Description>
+                {
+                    selectedCharacter.description ?
+                        <Description> {selectedCharacter.description} </Description>
+                        :
+                        <Description style={{ textAlign: 'center' }} > not available </Description>
+                }
             </Content>
         </Container>
     );
