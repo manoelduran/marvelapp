@@ -37,11 +37,12 @@ export function AdminHome() {
                 setUsers(data);
             })
     };
-     function handleDelete() {
+    function handleDelete() {
         if (search === '') {
             return;
         };
         setSearch('');
+        getUsers('');
     };
     function handleSearchUser() {
         getUsers(search);

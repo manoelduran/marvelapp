@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Home } from '@screens/Home';
-import { Character } from '@screens/Character';
 import { useAuth } from '@hooks/useAuth';
 import { UserTabRoutes } from './user.tab.routes';
 import { AdminHome } from '@screens/AdminHome';
+import { AdminUserPage } from '@screens/AdminUserPage';
+import { Character } from '@screens/Character';
 
 const { Navigator, Screen, Group } = createNativeStackNavigator();
 
@@ -24,12 +24,12 @@ export function UserStackRoutes() {
                                 component={AdminHome}
                             />
                             <Screen
-                                name="Character"
+                                name="AdminUserPage"
                                 options={{
                                     headerShown: false,
                                     gestureEnabled: false
                                 }}
-                                component={Character}
+                                component={AdminUserPage}
                             />
                         </Group>
                     ) : (

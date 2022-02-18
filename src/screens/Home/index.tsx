@@ -39,9 +39,7 @@ export function Home() {
             return;
         };
         setSearch('');
-        const response = await GetCharacters();
-        const listofCharacters = response.data.results;
-        setCharacters(listofCharacters);
+        fetchCharacters();
     };
     function handleCharacter(character: Character) {
         navigation.navigate('Character', {
