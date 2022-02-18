@@ -42,7 +42,7 @@ border-radius: 120px;
 export const Name = styled.Text`
 text-align: center;
 font-size: 24px;
-margin-top: 24px;
+margin-top: 20px;
 ${({ theme }) => css`
 font-family: ${theme.FONTS.TITLE};
 color: ${theme.COLORS.SUCCESS_900};
@@ -51,9 +51,15 @@ color: ${theme.COLORS.SUCCESS_900};
 
 export const Description = styled.Text`
 font-size: 14px;
-margin-top: 11px;
+margin-top: 20px;
 ${({ theme }) => css`
 font-family: ${theme.FONTS.TEXT};
 color: ${theme.COLORS.SECONDARY_400};
 `}
+`;
+
+export const Info = styled.View`
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 `;

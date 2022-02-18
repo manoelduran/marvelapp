@@ -9,7 +9,7 @@ import {
     Header,
     Title
 } from './styles';
-import { FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 
@@ -36,6 +36,9 @@ export function AdminHome() {
                 }) as User[];
                 setUsers(data);
             })
+            .catch(() => {
+                return Alert.alert('Não foi possivel carregar a lista de usuários');
+            });
     };
     function handleDelete() {
         if (search === '') {
@@ -51,7 +54,7 @@ export function AdminHome() {
         await signOut();
     };
     function handleCharacter(user: User) {
-        navigation.navigate('UserProfile', {
+        navigation.navigate('AdminUserPage', {
             user
         });
     };

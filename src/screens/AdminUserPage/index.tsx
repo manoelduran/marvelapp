@@ -9,6 +9,7 @@ import {
     Content,
     Thumbnail,
     Name,
+    Info,
     Description
 } from './styles';
 import { useTheme } from 'styled-components/native';
@@ -47,8 +48,24 @@ export function AdminUserPage() {
                         :
                         <Thumbnail source={{ uri: 'https://github.com/manoelduran.png' }} />
                 }
-                <Name> {selectedUser.name} </Name>
                 <ItemSeparator />
+                <Info>
+                <Name> Name: </Name>
+                <Description> {selectedUser.name} </Description>
+                </Info>
+                <Info>
+                    <Name>Password:</Name>
+                    <Description> {selectedUser.password} </Description>
+                </Info>
+                <Info>
+                    <Name>Type:</Name>
+                    {
+                        selectedUser.isAdmin ?
+                            <Description> Administrador </Description>
+                            :
+                            <Description> Usuário </Description>
+                    }
+                </Info>
             </Content>
         </Container>
     );
