@@ -35,11 +35,14 @@ export function Home() {
         await signOut();
     };
     async function handleDelete() {
+        if(search === ''){
+            return;
+        };
         setSearch('');
         const response = await GetCharacters();
         const listofCharacters = response.data.results;
         setCharacters(listofCharacters);
-    }
+    };
     function handleCharacter(character: Character) {
         navigation.navigate('Character', {
             character
