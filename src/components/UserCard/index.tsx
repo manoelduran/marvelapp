@@ -2,8 +2,10 @@ import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 import {
     Container,
+    Photo,
+    Content,
     NameContainer,
-    Description,
+    Type,
     Name,
 } from './styles';
 interface UserCardProps extends TouchableOpacityProps {
@@ -13,21 +15,25 @@ interface UserCardProps extends TouchableOpacityProps {
 export function UserCard({ index, data, ...rest }: UserCardProps) {
     return (
         <Container index={index}  {...rest} >
-            <Name>Login: </Name>
-            <NameContainer>
-                <Name> {data.name} </Name>
-            </NameContainer>
-            <Name>Senha: </Name>
-            <NameContainer>
-                <Name> {data.password} </Name>
-            </NameContainer>
-            <Name>Tipo de usuário: </Name>
             {
-                data?.isAdmin ?
-                    <Description> Administrador </Description>
+                data.photo ?
+                    <Photo source={{ uri: data.photo }} />
                     :
-                    <Description> Usuário </Description>
+                    <Photo source={{ uri: 'https://github.com/manoelduran.png' }} />
             }
+            <Content>
+                <Name>E-mail: </Name>
+                <NameContainer>
+                    <Name> {data.name} </Name>
+                </NameContainer>
+                <Name>Type: </Name>
+                {
+                    data?.isAdmin ?
+                        <Type> Administrador </Type>
+                        :
+                        <Type> Usuário </Type>
+                }
+            </Content>
         </Container>
     );
 }

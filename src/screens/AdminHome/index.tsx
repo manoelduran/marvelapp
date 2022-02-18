@@ -1,32 +1,51 @@
 import { Search } from '@components/Search';
 import { LogoutButton } from '@components/LogoutButton';
 import { UserCard } from '@components/UserCard';
+import firestore from '@react-native-firebase/firestore';
 import { useAuth } from '@hooks/useAuth';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     Container,
     Header,
     Title
 } from './styles';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 
 
 export function AdminHome() {
     const navigation = useNavigation();
-    const { signOut } = useAuth();
+    const { signOut, user } = useAuth();
     const [users, setUsers] = useState<User[]>([] as User[])
     const [search, setSearch] = useState('');
-    async function handleSearch() {
-
+    function getUsers(value: string) {
+        const formattedValue = value.toLowerCase().trim();
+        firestore()
+            .collection('users')
+            .orderBy('name')
+            .startAt(formattedValue)
+            .endAt(`${formattedValue}\uf8ff`)
+            .get()
+            .then(response => {
+                const data = response.docs.map(doc => {
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    };
+                }) as User[];
+                setUsers(data);
+            })
     };
-    async function handleDelete() {
+     function handleDelete() {
         if (search === '') {
             return;
         };
         setSearch('');
     };
+    function handleSearchUser() {
+        getUsers(search);
+    }
     async function handleSignOut() {
         await signOut();
     };
@@ -35,6 +54,10 @@ export function AdminHome() {
             user
         });
     };
+    useFocusEffect(
+        useCallback(() => {
+            getUsers(search);
+        }, []));
     return (
         <Container>
             <Header>
@@ -44,7 +67,7 @@ export function AdminHome() {
             <Search
                 value={search}
                 onChangeText={setSearch}
-                onSearch={handleSearch}
+                onSearch={handleSearchUser}
                 onClear={handleDelete}
             />
             <FlatList

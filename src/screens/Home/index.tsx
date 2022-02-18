@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { GetCharacters, searchCharacter } from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
@@ -35,7 +35,7 @@ export function Home() {
         await signOut();
     };
     async function handleDelete() {
-        if(search === ''){
+        if (search === '') {
             return;
         };
         setSearch('');

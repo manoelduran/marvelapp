@@ -44,5 +44,6 @@ interface User {
     id: string;
     name: string;
     isAdmin: boolean;
-    password: string;
+    password?: string;
+    photo?: string;
 };
