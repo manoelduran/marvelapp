@@ -46,4 +46,5 @@ interface User {
     isAdmin: boolean;
     password?: string;
     photo?: string;
+    photo_path?: string;
 };

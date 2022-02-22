@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<User | null>({} as User);
     const [loading, setLoading] = useState(false);
-    const { setItem, getItem, removeItem } = useAsyncStorage('@marvelland:user')
+    const { setItem, getItem, removeItem } = useAsyncStorage('@marvelland:usuario')
     async function signIn(email: string, password: string) {
         if (!email || !password) {
             return Alert.alert('Login', 'Informe o email e a senha');
@@ -80,7 +80,9 @@ function AuthProvider({ children }: AuthProviderProps) {
                         id: account.user.uid,
                         isAdmin: false,
                         name: email,
-                        password: password
+                        password: password,
+                        photo: '',
+                        photo_path: ''
                     })
                     .then(() => {
                         return Alert.alert('Create Account', 'Conta criada com sucesso')

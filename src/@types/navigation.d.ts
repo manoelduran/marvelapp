@@ -1,7 +1,7 @@
 export type CharacterNavigationProps = {
     character: Character;
 };
-export type UserProfileNavigationProps = {
+export type ProfileNavigationProps = {
     user: User;
 };
 export type AdminUserPageNavigationProps = {
@@ -14,7 +14,7 @@ export declare global {
             Home: undefined;
             AdminHome: undefined;
             AdminUserPage: AdminUserPageNavigationProps;
-            UserProfile: UserProfileNavigationProps;
+            Profile: ProfileNavigationProps;
             Character: CharacterNavigationProps;
         };
     };
