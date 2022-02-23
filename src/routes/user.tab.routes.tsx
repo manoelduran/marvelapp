@@ -17,7 +17,7 @@ export function UserTabRoutes() {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    height: 65,
+                    height: 45,
                     backgroundColor: theme.COLORS.BACKGROUND,
                     paddingVertical: Platform.OS === 'ios' ? 20 : 0
                 },

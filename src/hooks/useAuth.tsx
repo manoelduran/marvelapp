@@ -37,12 +37,16 @@ function AuthProvider({ children }: AuthProviderProps) {
                     .doc(email)
                     .get()
                     .then(async (profile) => {
-                        const { name, isAdmin } = profile.data() as User;
+                        const { name, isAdmin, password, photoUrl, photo_path, buttonId } = profile.data() as User;
                         if (profile.exists) {
                             const userData = {
                                 id: account.user.uid,
                                 name,
-                                isAdmin
+                                isAdmin,
+                                password,
+                                photoUrl,
+                                photo_path,
+                                buttonId
                             };
                             await setItem(JSON.stringify(userData));
                             console.log(userData);
@@ -81,8 +85,9 @@ function AuthProvider({ children }: AuthProviderProps) {
                         isAdmin: false,
                         name: email,
                         password: password,
-                        photo: '',
-                        photo_path: ''
+                        photoUrl: '',
+                        photo_path: '',
+                        buttonId: false,
                     })
                     .then(() => {
                         return Alert.alert('Create Account', 'Conta criada com sucesso')
