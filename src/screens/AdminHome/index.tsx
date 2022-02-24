@@ -3,7 +3,7 @@ import { LogoutButton } from '@components/LogoutButton';
 import { UserCard } from '@components/UserCard';
 import firestore from '@react-native-firebase/firestore';
 import { useAuth } from '@hooks/useAuth';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     Container,
     Header,

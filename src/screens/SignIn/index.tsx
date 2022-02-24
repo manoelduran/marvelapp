@@ -25,6 +25,15 @@ export function SignIn() {
         signIn(email, password);
     };
     function handleCreateAccount() {
+        if (!email) {
+            Alert.alert('Criação', 'Adicione o E-mail')
+        };
+        if (!password) {
+            Alert.alert('Criação', 'Adicione uma senha')
+        };
+        if (password.length < 6) {
+            Alert.alert('Criação', 'A senha precisa ter pelo menos 6 digitos')
+        }
         createAccount(email, password);
     };
     function handleForgotPassword() {

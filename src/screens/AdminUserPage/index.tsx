@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AdminUserPageNavigationProps } from '@src/@types/navigation';
+import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 import { BackButton } from '@components/BackButton';
 import {
     Container,
@@ -14,6 +16,7 @@ import {
 } from './styles';
 import { useTheme } from 'styled-components/native';
 import { ItemSeparator } from '@components/ItemSeparator';
+import { Button } from '@components/Button';
 
 
 
@@ -29,10 +32,22 @@ export function AdminUserPage() {
     };
     function fetchUser() {
         setSelectedUser(user)
+    };
+    function handleDeleteUser() {
+        firestore()
+            .collection('users')
+            .doc(user.name)
+            .delete()
+            .then(() => {
+                storage()
+                    .ref(user.photo_path)
+                    .delete()
+            })
+        navigation.navigate('AdminHome')
     }
     useEffect(() => {
         fetchUser();
-    }, [user])
+    }, [user]);
     return (
         <Container>
             <Header>
@@ -40,18 +55,23 @@ export function AdminUserPage() {
                     onPress={handleBack}
                 />
                 <Title>Marvel Land </Title>
+                <Button
+                    title='Deletar Usuário'
+                    style={{ backgroundColor: 'red' }}
+                    onPress={handleDeleteUser}
+                />
             </Header>
             <Content>
                 {
-                    selectedUser.photo ?
-                        <Thumbnail source={{ uri: selectedUser.photo }} />
+                    selectedUser.photoUrl ?
+                        <Thumbnail source={{ uri: selectedUser.photoUrl }} />
                         :
                         <Thumbnail source={{ uri: 'https://github.com/manoelduran.png' }} />
                 }
                 <ItemSeparator />
                 <Info>
-                <Name> Name: </Name>
-                <Description> {selectedUser.name} </Description>
+                    <Name> Name: </Name>
+                    <Description> {selectedUser.name} </Description>
                 </Info>
                 <Info>
                     <Name>Password:</Name>

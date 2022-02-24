@@ -16,8 +16,8 @@ export function UserCard({ index, data, ...rest }: UserCardProps) {
     return (
         <Container index={index}  {...rest} >
             {
-                data.photo ?
-                    <Photo source={{ uri: data.photo }} />
+                data.photoUrl ?
+                    <Photo source={{ uri: data.photoUrl }} />
                     :
                     <Photo source={{ uri: 'https://github.com/manoelduran.png' }} />
             }

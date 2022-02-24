@@ -13,12 +13,13 @@ export const Header = styled(LinearGradient).attrs(({ theme }) => ({
 width: 100%;
 flex-direction: row;
 justify-content: flex-start;
+align-items: center;
 padding: ${getStatusBarHeight() + 33}px 24px 24px;
 `;
 
 export const Title = styled.Text`
 font-size: 24px;
-margin-left: 45px;
+margin-left: 35px;
 ${({ theme }) => css`
 font-family: ${theme.FONTS.TITLE};
 color: ${theme.COLORS.TITLE};
