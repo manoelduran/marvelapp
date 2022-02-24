@@ -18,4 +18,4 @@ export function BackButton({ ...rest }: TouchableOpacityProps) {
             />
         </Container>
     );
-}
+};

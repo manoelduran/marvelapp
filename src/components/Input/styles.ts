@@ -11,7 +11,6 @@ font-size: 14px;
 padding: 7px 0;
 padding-left: 20px;
 margin-bottom: 16px;
-
 ${({ theme }) => css`
     font-family: ${theme.FONTS.TEXT};
     border: 1px solid ${theme.COLORS.SHAPE};

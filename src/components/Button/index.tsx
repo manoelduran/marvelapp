@@ -17,4 +17,4 @@ export function Button({ title, isLoading = false, ...rest }: ButtonProps) {
             {isLoading ? <Load /> : <Title> {title} </Title>}
         </Container>
     );
-}
+};

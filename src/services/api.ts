@@ -3,7 +3,7 @@ const { PUBLIC_KEY } = process.env;
 
 export const api = axios.create({
     baseURL: 'https://gateway.marvel.com:443/'
-})
+});
 
 
 export async function GetCharacters(): Promise<Characters> {

@@ -7,10 +7,11 @@ import {
     Name,
     Thumbnail
 } from './styles';
+
 interface CharacterCardProps extends TouchableOpacityProps {
     index: number;
     data: Character;
-}
+};
 
 export function CharacterCard({ index, data, ...rest }: CharacterCardProps) {
     return (
@@ -25,7 +26,6 @@ export function CharacterCard({ index, data, ...rest }: CharacterCardProps) {
                     :
                     <Description> not available </Description>
             }
-
         </Container>
     );
-}
+};

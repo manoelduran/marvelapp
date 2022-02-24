@@ -15,5 +15,5 @@ export function Routes() {
                 <SignIn />
             }
         </NavigationContainer>
-    )
-}
+    );
+};

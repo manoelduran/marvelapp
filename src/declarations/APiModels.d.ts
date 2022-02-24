@@ -31,15 +31,6 @@ interface Characters {
     }
 };
 
-interface CharacterFirebase {
-    name: string,
-    description: string,
-    thumbnail: {
-        path: string,
-        extension: string
-    },
-};
-
 interface User {
     id: string;
     name: string;
@@ -48,4 +39,5 @@ interface User {
     photoUrl: string;
     photo_path?: string;
     buttonId?: boolean;
+    favorites?: Character[];
 };

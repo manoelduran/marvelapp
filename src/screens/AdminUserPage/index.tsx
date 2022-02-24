@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { AdminUserPageNavigationProps } from '@src/@types/navigation';
+import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import auth from '@react-native-firebase/auth';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { AdminUserPageNavigationProps } from '@src/@types/navigation';
+import { useTheme } from 'styled-components/native';
+import { ItemSeparator } from '@components/ItemSeparator';
+import { Button } from '@components/Button';
 import { BackButton } from '@components/BackButton';
 import {
     Container,
@@ -15,16 +17,10 @@ import {
     Info,
     Description
 } from './styles';
-import { useTheme } from 'styled-components/native';
-import { ItemSeparator } from '@components/ItemSeparator';
-import { Button } from '@components/Button';
-
-
-
+import { Alert } from 'react-native';
 
 export function AdminUserPage() {
     const route = useRoute();
-    const theme = useTheme();
     const navigation = useNavigation();
     const { user } = route.params as AdminUserPageNavigationProps;
     const [selectedUser, setSelectedUser] = useState({} as User);
@@ -32,7 +28,7 @@ export function AdminUserPage() {
         navigation.goBack();
     };
     function fetchUser() {
-        setSelectedUser(user)
+        setSelectedUser(user);
     };
     function handleDeleteUser() {
         firestore()
@@ -44,8 +40,9 @@ export function AdminUserPage() {
                     .ref(user.photo_path)
                     .delete()
             })
-        navigation.navigate('AdminHome')
-    }
+            .catch(() => Alert.alert('Não foi possivel deletar o usuáriro'));
+        navigation.navigate('AdminHome');
+    };
     useEffect(() => {
         fetchUser();
     }, [user]);
@@ -90,4 +87,4 @@ export function AdminUserPage() {
             </Content>
         </Container>
     );
-}
+};

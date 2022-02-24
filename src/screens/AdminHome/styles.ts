@@ -4,7 +4,6 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const Container = styled.View``;
 
-
 export const Header = styled(LinearGradient).attrs(({ theme }) => ({
     colors: theme.COLORS.GRADIENT
 }))`

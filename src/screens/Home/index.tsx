@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { GetCharacters, searchCharacter } from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
@@ -12,10 +12,6 @@ import {
     Title
 } from './styles';
 
-
-
-
-
 export function Home() {
     const navigation = useNavigation();
     const { signOut } = useAuth();
@@ -28,7 +24,6 @@ export function Home() {
     };
     async function handleSearch() {
         const response = await searchCharacter(search);
-
         setCharacters(response.data.results);
     };
     async function handleSignOut() {
@@ -82,4 +77,4 @@ export function Home() {
             />
         </Container>
     );
-}
+};

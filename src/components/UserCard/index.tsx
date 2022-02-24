@@ -8,10 +8,12 @@ import {
     Type,
     Name,
 } from './styles';
+
 interface UserCardProps extends TouchableOpacityProps {
     index: number;
     data: User;
-}
+};
+
 export function UserCard({ index, data, ...rest }: UserCardProps) {
     return (
         <Container index={index}  {...rest} >
@@ -36,4 +38,4 @@ export function UserCard({ index, data, ...rest }: UserCardProps) {
             </Content>
         </Container>
     );
-}
+};

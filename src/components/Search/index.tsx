@@ -40,4 +40,4 @@ export function Search({ onSearch, onClear, ...rest }: SearchProps) {
             </Button>
         </Container>
     );
-}
+};

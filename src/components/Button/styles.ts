@@ -13,7 +13,6 @@ background-color: ${({ theme }) => theme.COLORS.SUCCESS_900};
 
 export const Title = styled.Text`
 font-size: 14px;
-
 ${({ theme }) => css`
 color: ${theme.COLORS.TITLE};
 font-family: ${theme.FONTS.TEXT};
@@ -22,6 +21,4 @@ font-family: ${theme.FONTS.TEXT};
 
 export const Load = styled.ActivityIndicator.attrs(({ theme }) => ({
     color: theme.COLORS.TITLE
-}))`
-
-`;
+}))``;

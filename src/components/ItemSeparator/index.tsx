@@ -7,4 +7,4 @@ export function ItemSeparator() {
     return (
         <Separator />
     );
-}
+};

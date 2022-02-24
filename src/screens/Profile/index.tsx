@@ -6,6 +6,7 @@ import { Photo } from "@components/Photo";
 import { useAuth } from "@hooks/useAuth";
 import { Alert, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { ItemSeparator } from "@components/ItemSeparator";
 import {
     Container,
     Header,
@@ -18,9 +19,6 @@ import {
     Name,
     Content
 } from './styles';
-import { ItemSeparator } from "@components/ItemSeparator";
-
-
 
 export function Profile() {
     const { user } = useAuth();
@@ -61,14 +59,14 @@ export function Profile() {
             })
             .then(() => {
                 setLoading(false);
-                setPhotoPath(reference.fullPath)
+                setPhotoPath(reference.fullPath);
                 setButtonId(true);
-                navigation.navigate('Home')
+                navigation.navigate('Home');
             })
             .catch(() => {
                 setLoading(false);
-                Alert.alert('Editar Perfil', 'Não foi possivel editar o perfil')
-            })
+                Alert.alert('Editar Perfil', 'Não foi possivel editar o perfil');
+            });
     };
     async function handleDeletePhoto() {
         firestore()
@@ -80,13 +78,14 @@ export function Profile() {
                 buttonId: false
             })
             .then(() => {
-                setPhotoView('')
-                setPhotoPath('')
+                setPhotoView('');
+                setPhotoPath('');
                 setButtonId(false);
                 storage()
                     .ref(photoPath)
                     .delete()
             })
+            .catch(() => Alert.alert('Não foi possivel deletar a foto'));
         navigation.navigate('Home');
     };
     useEffect(() => {
@@ -101,8 +100,8 @@ export function Profile() {
                     setPhotoPath(String(userResponse.photo_path))
                     setPhotoView(userResponse.photoUrl)
                 })
-        }
-    }, [])
+        };
+    }, []);
     return (
         <Container>
             <ScrollView showsVerticalScrollIndicator={false} >
@@ -146,4 +145,4 @@ export function Profile() {
             </ScrollView>
         </Container>
     );
-}
+};

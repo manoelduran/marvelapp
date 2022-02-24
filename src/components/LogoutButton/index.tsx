@@ -19,4 +19,4 @@ export function LogoutButton({ ...rest }: TouchableOpacityProps) {
             />
         </Container>
     );
-}
+};

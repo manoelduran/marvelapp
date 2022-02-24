@@ -1,22 +1,20 @@
+import React, { useCallback, useState } from 'react';
+import { Alert, FlatList } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 import { Search } from '@components/Search';
 import { LogoutButton } from '@components/LogoutButton';
 import { UserCard } from '@components/UserCard';
-import firestore from '@react-native-firebase/firestore';
 import { useAuth } from '@hooks/useAuth';
-import React, { useCallback, useState } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import {
     Container,
     Header,
     Title
 } from './styles';
-import { Alert, FlatList } from 'react-native';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-
-
 
 export function AdminHome() {
     const navigation = useNavigation();
-    const { signOut, user } = useAuth();
+    const { signOut } = useAuth();
     const [users, setUsers] = useState<User[]>([] as User[])
     const [search, setSearch] = useState('');
     function getUsers(value: string) {
@@ -49,7 +47,7 @@ export function AdminHome() {
     };
     function handleSearchUser() {
         getUsers(search);
-    }
+    };
     async function handleSignOut() {
         await signOut();
     };
@@ -91,4 +89,4 @@ export function AdminHome() {
             />
         </Container>
     );
-}
+};

@@ -7,7 +7,7 @@ import {
 
 interface PhotoProps {
     uri: string | null;
-}
+};
 
 export function Photo({ uri }: PhotoProps) {
     if (uri) {
@@ -20,4 +20,4 @@ export function Photo({ uri }: PhotoProps) {
             <PlaceholderTitle>Nenhuma foto {'\n'} carregada</PlaceholderTitle>
         </Placeholder>
     );
-}
+};

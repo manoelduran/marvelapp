@@ -1,8 +1,7 @@
 import { Button } from "@components/Button";
 import { LinearGradient } from "expo-linear-gradient";
-import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import styled, { css } from "styled-components/native";
-
 
 export const Container = styled.View`
 flex: 1;

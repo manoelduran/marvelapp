@@ -15,14 +15,14 @@ export default function App() {
   });
   if (!fontsLoaded) {
     return <AppLoading />
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style='light' translucent backgroundColor='transparent' />
       <AuthProvider>
-      <Routes />
+        <Routes />
       </AuthProvider>
     </ThemeProvider>
   );
-}
+};

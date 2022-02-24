@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
 import { CharacterNavigationProps } from '@src/@types/navigation';
 import { BackButton } from '@components/BackButton';
+import { ItemSeparator } from '@components/ItemSeparator';
 import {
     Container,
     Header,
@@ -11,11 +13,6 @@ import {
     Name,
     Description
 } from './styles';
-import { useTheme } from 'styled-components/native';
-import { ItemSeparator } from '@components/ItemSeparator';
-
-
-
 
 export function Character() {
     const route = useRoute();
@@ -27,11 +24,11 @@ export function Character() {
         navigation.goBack();
     };
     function fetchCharacter() {
-        setSelectedCharacter(character)
-    }
+        setSelectedCharacter(character);
+    };
     useEffect(() => {
         fetchCharacter();
-    }, [character])
+    }, [character]);
     return (
         <Container>
             <Header>
@@ -55,4 +52,4 @@ export function Character() {
             </Content>
         </Container>
     );
-}
+};

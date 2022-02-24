@@ -1,8 +1,8 @@
 import React, { useState, useEffect, createContext, useContext, ReactNode } from 'react';
+import { Alert } from 'react-native';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import { Alert } from 'react-native';
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<User | null>({} as User);
     const [loading, setLoading] = useState(false);
-    const { setItem, getItem, removeItem } = useAsyncStorage('@marvelland:usuario')
+    const { setItem, getItem, removeItem } = useAsyncStorage('@marvelland:usuario');
     async function signIn(email: string, password: string) {
         if (!email || !password) {
             return Alert.alert('Login', 'Informe o email e a senha');
@@ -49,7 +49,6 @@ function AuthProvider({ children }: AuthProviderProps) {
                                 buttonId
                             };
                             await setItem(JSON.stringify(userData));
-                            console.log(userData);
                             setUser(userData);
                         };
                     })
@@ -90,12 +89,12 @@ function AuthProvider({ children }: AuthProviderProps) {
                         buttonId: false,
                     })
                     .then(() => {
-                        return Alert.alert('Create Account', 'Conta criada com sucesso')
+                        return Alert.alert('Create Account', 'Conta criada com sucesso');
                     })
                     .catch(() => {
-                        return Alert.alert('Create Account', 'Erro ao tentar criar conta')
-                    })
-            })
+                        return Alert.alert('Create Account', 'Erro ao tentar criar conta');
+                    });
+            });
     };
     async function loadUser() {
         const userCollection = await getItem();
@@ -125,11 +124,11 @@ function AuthProvider({ children }: AuthProviderProps) {
             {children}
         </AuthContext.Provider>
     );
-}
+};
 
 function useAuth() {
     const context = useContext(AuthContext);
     return context;
 };
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };
