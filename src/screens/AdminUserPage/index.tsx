@@ -3,6 +3,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { AdminUserPageNavigationProps } from '@src/@types/navigation';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import auth from '@react-native-firebase/auth';
 import { BackButton } from '@components/BackButton';
 import {
     Container,

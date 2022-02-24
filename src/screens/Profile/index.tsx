@@ -27,7 +27,7 @@ export function Profile() {
     const navigation = useNavigation();
     const [photoView, setPhotoView] = useState('');
     const [photoPath, setPhotoPath] = useState('');
-    const [buttonId, setButtonId] = useState(false);
+    const [buttonId, setButtonId] = useState(user?.buttonId);
     const [loading, setLoading] = useState(false);
     async function handlePickImage() {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -60,9 +60,9 @@ export function Profile() {
                 photo_path: reference.fullPath
             })
             .then(() => {
-                setPhotoPath(reference.fullPath)
-                setButtonId(true)
                 setLoading(false);
+                setPhotoPath(reference.fullPath)
+                setButtonId(true);
                 navigation.navigate('Home')
             })
             .catch(() => {
@@ -80,14 +80,29 @@ export function Profile() {
                 buttonId: false
             })
             .then(() => {
+                setPhotoView('')
+                setPhotoPath('')
+                setButtonId(false);
                 storage()
                     .ref(photoPath)
                     .delete()
             })
-        setPhotoView('')
-        setButtonId(false)
         navigation.navigate('Home');
     };
+    useEffect(() => {
+        if (user) {
+            firestore()
+                .collection('users')
+                .doc(user.name)
+                .get()
+                .then(response => {
+                    const userResponse = response.data() as User;
+                    setButtonId(userResponse.buttonId)
+                    setPhotoPath(String(userResponse.photo_path))
+                    setPhotoView(userResponse.photoUrl)
+                })
+        }
+    }, [])
     return (
         <Container>
             <ScrollView showsVerticalScrollIndicator={false} >
@@ -122,7 +137,7 @@ export function Profile() {
                                 <Description> Usuário </Description>
                         }
                     </Info>
-                    {buttonId=== false && <AddButton
+                    {buttonId === false && <AddButton
                         title="Editar"
                         isLoading={loading}
                         onPress={handleAddPhoto}
