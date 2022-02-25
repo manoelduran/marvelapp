@@ -12,7 +12,6 @@ interface AuthContextData {
     user: User | null;
     loading: boolean;
     signIn: (email: string, password: string) => Promise<void>;
-    loadUser: () => Promise<void>;
     signOut: () => Promise<void>;
     createAccount: (email: string, password: string) => Promise<void>;
     forgotPassword: (email: string) => Promise<void>;
@@ -21,7 +20,7 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<User | null>({} as User);
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(false);
     const { setItem, getItem, removeItem } = useAsyncStorage('@marvelland:usuario');
     async function signIn(email: string, password: string) {
@@ -49,6 +48,7 @@ function AuthProvider({ children }: AuthProviderProps) {
                                 buttonId
                             };
                             await setItem(JSON.stringify(userData));
+                            console.log('LOGIN', userData);
                             setUser(userData);
                         };
                     })
@@ -71,6 +71,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             .signOut();
         await removeItem();
         setUser(null);
+        console.log('DELETE', user)
     };
     async function createAccount(email: string, password: string) {
         await auth()
@@ -99,10 +100,11 @@ function AuthProvider({ children }: AuthProviderProps) {
     async function loadUser() {
         const userCollection = await getItem();
         if (userCollection) {
-            const parsedUser = await JSON.parse(userCollection) as User;
-            setUser(parsedUser);
+            const parsedUser = await JSON.parse(String(userCollection)) as User;
+            signIn(parsedUser.name, String(parsedUser.password))
         };
     };
+
     async function forgotPassword(email: string) {
         if (!email) {
             return Alert.alert('Reset Password', 'Informe o E-mail');
@@ -117,10 +119,10 @@ function AuthProvider({ children }: AuthProviderProps) {
             });
     };
     useEffect(() => {
-        loadUser();
+        loadUser()
     }, []);
     return (
-        <AuthContext.Provider value={{ loading, createAccount, forgotPassword, loadUser, signIn, signOut, user }} >
+        <AuthContext.Provider value={{ loading, createAccount, forgotPassword, signIn, signOut, user }} >
             {children}
         </AuthContext.Provider>
     );
