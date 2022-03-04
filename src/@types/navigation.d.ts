@@ -8,6 +8,10 @@ export type AdminUserPageNavigationProps = {
     user: User;
 };
 
+export type AdminUserFavoritesNavigationProps = {
+    user: User;
+}
+
 
 export declare global {
     namespace ReactNavigation {
@@ -15,6 +19,7 @@ export declare global {
             Home: undefined;
             AdminHome: undefined;
             AdminUserPage: AdminUserPageNavigationProps;
+            AdminUserFavorites: AdminUserFavoritesNavigationProps;
             Profile: ProfileNavigationProps;
             Character: CharacterNavigationProps;
             UserFavorites: undefined;

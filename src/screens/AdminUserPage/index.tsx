@@ -42,8 +42,10 @@ export function AdminUserPage() {
             .catch(() => Alert.alert('Não foi possivel deletar o usuáriro'));
         navigation.navigate('AdminHome');
     };
-    function handleFavorites() {
-        navigation.navigate('UserFavorites')
+    function handleAdminUserFavorites(user: User) {
+        navigation.navigate('AdminUserFavorites', {
+            user
+        })
     }
     useEffect(() => {
         fetchUser();
@@ -88,7 +90,8 @@ export function AdminUserPage() {
                 </Info>
                 <Button
                     title="Favoritos"
-                    onPress={handleFavorites}
+                    onPress={() => handleAdminUserFavorites(user)}
+                    style={{ marginBottom: 15 }}
                 />
             </Content>
         </Container>

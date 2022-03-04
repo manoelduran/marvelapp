@@ -5,6 +5,7 @@ import { AdminHome } from '@screens/AdminHome';
 import { AdminUserPage } from '@screens/AdminUserPage';
 import { Character } from '@screens/Character';
 import { UserFavorites } from '@screens/UserFavorites';
+import { AdminUserFavorites } from '@screens/AdminUserFavorites';
 
 const { Navigator, Screen, Group } = createNativeStackNavigator();
 
@@ -33,12 +34,12 @@ export function UserStackRoutes() {
                                 component={AdminUserPage}
                             />
                             <Screen
-                                name="UserFavorites"
+                                name="AdminUserFavorites"
                                 options={{
                                     headerShown: false,
                                     gestureEnabled: false
                                 }}
-                                component={UserFavorites}
+                                component={AdminUserFavorites}
                             />
                         </Group>
                     ) : (
