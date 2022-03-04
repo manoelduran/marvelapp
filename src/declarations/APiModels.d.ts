@@ -1,10 +1,11 @@
 interface Character {
+    active?: boolean,
     id: number,
     name: string,
     description: string,
-    modified: Date,
-    resourceURI: string,
-    urls: [
+    modified?: Date,
+    resourceURI?: string,
+    urls?: [
         {
             type: string,
             url: string

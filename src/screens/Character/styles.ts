@@ -1,6 +1,11 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { Feather } from '@expo/vector-icons';
 import styled, { css } from "styled-components/native";
+
+interface LabelProps {
+    active: boolean;
+}
 
 export const Container = styled.View`
 flex: 1;
@@ -56,4 +61,9 @@ ${({ theme }) => css`
 font-family: ${theme.FONTS.TEXT};
 color: ${theme.COLORS.SECONDARY_400};
 `}
+`;
+
+export const Icon = styled(Feather) <LabelProps>`
+margin-left: 15px;
+color: ${({ active, theme }) => active ? theme.COLORS.SUCCESS_900 : theme.COLORS.SECONDARY_900}; 
 `;

@@ -3,7 +3,6 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AdminUserPageNavigationProps } from '@src/@types/navigation';
-import { useTheme } from 'styled-components/native';
 import { ItemSeparator } from '@components/ItemSeparator';
 import { Button } from '@components/Button';
 import { BackButton } from '@components/BackButton';
@@ -43,6 +42,9 @@ export function AdminUserPage() {
             .catch(() => Alert.alert('Não foi possivel deletar o usuáriro'));
         navigation.navigate('AdminHome');
     };
+    function handleFavorites() {
+        navigation.navigate('UserFavorites')
+    }
     useEffect(() => {
         fetchUser();
     }, [user]);
@@ -84,6 +86,10 @@ export function AdminUserPage() {
                             <Description> Usuário </Description>
                     }
                 </Info>
+                <Button
+                    title="Favoritos"
+                    onPress={handleFavorites}
+                />
             </Content>
         </Container>
     );

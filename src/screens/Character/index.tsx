@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
 import { CharacterNavigationProps } from '@src/@types/navigation';
+import firestore from '@react-native-firebase/firestore';
 import { BackButton } from '@components/BackButton';
 import { ItemSeparator } from '@components/ItemSeparator';
 import {
@@ -11,15 +12,62 @@ import {
     Content,
     Thumbnail,
     Name,
-    Description
+    Description,
+    Icon
 } from './styles';
+import { useAuth } from '@hooks/useAuth';
+import { Alert } from 'react-native';
 
 export function Character() {
     const route = useRoute();
+    const { user } = useAuth();
     const theme = useTheme();
     const navigation = useNavigation();
     const { character } = route.params as CharacterNavigationProps;
     const [selectedCharacter, setSelectedCharacter] = useState({} as Character);
+    const [favoritedCharacter, setFavoritedCharacter] = useState<Character | undefined>({} as Character);
+    function favoriteCharacter() {
+        firestore()
+            .collection(`users/${user?.name}/favorites`)
+            .doc(character.name)
+            .set({
+                active: true,
+                id: character.id,
+                name: character.name,
+                description: character.description,
+                thumbnail: {
+                    path: character.thumbnail.path,
+                    extension: character.thumbnail.extension
+                },
+            }).then(() => {
+                firestore()
+                    .collection(`users/${user?.name}/favorites`)
+                    .doc(character.name)
+                    .get()
+                    .then(response => {
+                        const data = response.data() as unknown as Character;
+                        setFavoritedCharacter(data)
+                    })
+                    .catch(() => Alert.alert('Buscar favorito Ativo', 'Não foi possivel verificar se o personagem é favorito ou não'))
+                return Alert.alert('Lista de favoritos', 'Personagem adicionado a lista de favoritos');
+            })
+            .catch(() => {
+                return Alert.alert('Lista de favoritos', 'Não é possivel adicionar o personagem a lista de favoritos');
+            });
+    };
+    function removeCharacter() {
+        firestore()
+            .collection(`users/${user?.name}/favorites`)
+            .doc(character.name)
+            .delete()
+            .then(() => {
+                setFavoritedCharacter(undefined);
+                return Alert.alert('Lista de favoritos', 'Personagem removido da lista de favoritos');
+            })
+            .catch(() => {
+                return Alert.alert('Lista de favoritos', 'Não é possivel remover o personagem da lista de favoritos');
+            });
+    };
     function handleBack() {
         navigation.goBack();
     };
@@ -42,6 +90,12 @@ export function Character() {
                     source={{ uri: `${selectedCharacter?.thumbnail?.path}/portrait_incredible.${selectedCharacter?.thumbnail?.extension}` }}
                 />
                 <Name> {selectedCharacter.name} </Name>
+                {
+                    favoritedCharacter?.active  ?
+                        <Icon name='star' size={30} active={true} onPress={() => removeCharacter()} />
+                        :
+                        <Icon name='star' size={30} active={false} onPress={() => favoriteCharacter()} />
+                }
                 <ItemSeparator />
                 {
                     selectedCharacter.description ?

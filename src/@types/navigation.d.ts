@@ -8,6 +8,7 @@ export type AdminUserPageNavigationProps = {
     user: User;
 };
 
+
 export declare global {
     namespace ReactNavigation {
         interface RootParamList {
@@ -16,6 +17,7 @@ export declare global {
             AdminUserPage: AdminUserPageNavigationProps;
             Profile: ProfileNavigationProps;
             Character: CharacterNavigationProps;
+            UserFavorites: undefined;
         };
     };
 };

@@ -4,6 +4,7 @@ import { UserTabRoutes } from './user.tab.routes';
 import { AdminHome } from '@screens/AdminHome';
 import { AdminUserPage } from '@screens/AdminUserPage';
 import { Character } from '@screens/Character';
+import { UserFavorites } from '@screens/UserFavorites';
 
 const { Navigator, Screen, Group } = createNativeStackNavigator();
 
@@ -31,6 +32,14 @@ export function UserStackRoutes() {
                                 }}
                                 component={AdminUserPage}
                             />
+                            <Screen
+                                name="UserFavorites"
+                                options={{
+                                    headerShown: false,
+                                    gestureEnabled: false
+                                }}
+                                component={UserFavorites}
+                            />
                         </Group>
                     ) : (
                         <Group>
@@ -49,6 +58,14 @@ export function UserStackRoutes() {
                                     gestureEnabled: false
                                 }}
                                 component={Character}
+                            />
+                            <Screen
+                                name="UserFavorites"
+                                options={{
+                                    headerShown: false,
+                                    gestureEnabled: false
+                                }}
+                                component={UserFavorites}
                             />
                         </Group>
                     )

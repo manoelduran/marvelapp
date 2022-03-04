@@ -19,6 +19,7 @@ import {
     Name,
     Content
 } from './styles';
+import { Button } from "@components/Button";
 
 export function Profile() {
     const { user } = useAuth();
@@ -88,6 +89,9 @@ export function Profile() {
             .catch(() => Alert.alert('Não foi possivel deletar a foto'));
         navigation.navigate('Home');
     };
+    function handleFavorites() {
+        navigation.navigate('UserFavorites')
+    }
     useEffect(() => {
         if (user) {
             firestore()
@@ -136,6 +140,10 @@ export function Profile() {
                                 <Description> Usuário </Description>
                         }
                     </Info>
+                    <Button
+                        title="Favoritos"
+                        onPress={handleFavorites}
+                    />
                     {buttonId === false && <AddButton
                         title="Editar"
                         isLoading={loading}
