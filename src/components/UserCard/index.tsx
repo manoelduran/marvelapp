@@ -31,9 +31,9 @@ export function UserCard({ index, data, ...rest }: UserCardProps) {
                 <Name>Type: </Name>
                 {
                     data?.isAdmin ?
-                        <Type> Administrador </Type>
+                        <Type> Administrator </Type>
                         :
-                        <Type> Usuário </Type>
+                        <Type> User </Type>
                 }
             </Content>
         </Container>

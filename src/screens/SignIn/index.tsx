@@ -26,13 +26,13 @@ export function SignIn() {
     };
     function handleCreateAccount() {
         if (!email) {
-            Alert.alert('Criação', 'Adicione o E-mail');
+            Alert.alert('Account Creation', 'E-mail is required!');
         };
         if (!password) {
-            Alert.alert('Criação', 'Adicione uma senha');
+            Alert.alert('Account Creation', 'Password is required!');
         };
         if (password.length < 6) {
-            Alert.alert('Criação', 'A senha precisa ter pelo menos 6 digitos');
+            Alert.alert('Account Creation', 'Password must be at least 6 characters long!');
         };
         createAccount(email, password);
     };
@@ -52,19 +52,19 @@ export function SignIn() {
                         autoCapitalize='none'
                     />
                     <Input
-                        placeholder="Senha"
+                        placeholder="Password"
                         onChangeText={setPassword}
                         secureTextEntry
                     />
                     <FooterContainer>
                         <CreateAccount onPress={handleCreateAccount} >
-                            <CreateAccountLabel>Criar conta</CreateAccountLabel>
+                            <CreateAccountLabel>Create account</CreateAccountLabel>
                         </CreateAccount>
                         <ForgotPasswordButton onPress={handleForgotPassword}>
-                            <ForgotPasswordLabel>Esqueci minha senha</ForgotPasswordLabel>
+                            <ForgotPasswordLabel>Forgot password</ForgotPasswordLabel>
                         </ForgotPasswordButton>
                     </FooterContainer>
-                    <Button title='Conectar' onPress={handleSignIn} isLoading={false} />
+                    <Button title='Connect' onPress={handleSignIn} isLoading={false} />
                 </Content>
             </KeyboardAvoidingView>
         </Container>

@@ -48,11 +48,11 @@ export function Character() {
                         const data = response.data() as unknown as Character;
                         setFavoritedCharacter(data)
                     })
-                    .catch(() => Alert.alert('Buscar favorito Ativo', 'Não foi possivel verificar se o personagem é favorito ou não'))
-                return Alert.alert('Lista de favoritos', 'Personagem adicionado a lista de favoritos');
+                    .catch(() => Alert.alert('Search Active Favorite', 'Unable to check if the character is favorite or not!'))
+                return Alert.alert('Favorites List', 'Character added to favorites list!');
             })
             .catch(() => {
-                return Alert.alert('Lista de favoritos', 'Não é possivel adicionar o personagem a lista de favoritos');
+                return Alert.alert('Favorites List', 'Unable to add character to favorites list!');
             });
     };
     function removeCharacter() {
@@ -62,10 +62,10 @@ export function Character() {
             .delete()
             .then(() => {
                 setFavoritedCharacter(undefined);
-                return Alert.alert('Lista de favoritos', 'Personagem removido da lista de favoritos');
+                return Alert.alert('Favorites List', 'Character removed from favorites list!');
             })
             .catch(() => {
-                return Alert.alert('Lista de favoritos', 'Não é possivel remover o personagem da lista de favoritos');
+                return Alert.alert('Favorites List', 'Unable to remove character from favorites list!');
             });
     };
     function handleBack() {
@@ -83,7 +83,7 @@ export function Character() {
                 <BackButton
                     onPress={handleBack}
                 />
-                <Title>Marvel Land </Title>
+                <Title>MarvelApp </Title>
             </Header>
             <Content>
                 <Thumbnail
@@ -91,7 +91,7 @@ export function Character() {
                 />
                 <Name> {selectedCharacter.name} </Name>
                 {
-                    favoritedCharacter?.active  ?
+                    favoritedCharacter?.active ?
                         <Icon name='star' size={30} active={true} onPress={() => removeCharacter()} />
                         :
                         <Icon name='star' size={30} active={false} onPress={() => favoriteCharacter()} />

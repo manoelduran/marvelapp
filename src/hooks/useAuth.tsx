@@ -25,7 +25,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     const { setItem, getItem, removeItem } = useAsyncStorage('@marvelland:usuario');
     async function signIn(email: string, password: string) {
         if (!email || !password) {
-            return Alert.alert('Login', 'Informe o email e a senha');
+            return Alert.alert('Login', 'Provide email and password!');
         };
         setLoading(true);
         auth()
@@ -48,20 +48,20 @@ function AuthProvider({ children }: AuthProviderProps) {
                                 buttonId
                             };
                             await setItem(JSON.stringify(userData));
-                            console.log('LOGIN', userData);
+                            console.log('Login', userData);
                             setUser(userData);
                         };
                     })
                     .catch(() => {
-                        Alert.alert('Login', 'Não foi possivel buscar os dados do usuario');
+                        Alert.alert('Login', 'Unable to fetch user data');
                     })
             })
             .catch(error => {
                 const { code } = error;
                 if (code === 'auth/user-not-found' || code === 'auth/wrong-password') {
-                    return Alert.alert('Login', 'E-mail ou senha inválidos')
+                    return Alert.alert('Login', 'Invalid email or password!')
                 } else {
-                    return Alert.alert('Login', 'Não foi possível realizar o login');
+                    return Alert.alert('Login', 'Unable to login!');
                 };
             })
             .finally(() => setLoading(false));
@@ -71,7 +71,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             .signOut();
         await removeItem();
         setUser(null);
-        console.log('DELETE', user)
+        console.log('Delete', user)
     };
     async function createAccount(email: string, password: string) {
         await auth()
@@ -90,10 +90,10 @@ function AuthProvider({ children }: AuthProviderProps) {
                         buttonId: false,
                     })
                     .then(() => {
-                        return Alert.alert('Create Account', 'Conta criada com sucesso');
+                        return Alert.alert('Create Account', 'Account created successfully!');
                     })
                     .catch(() => {
-                        return Alert.alert('Create Account', 'Erro ao tentar criar conta');
+                        return Alert.alert('Create Account', 'Error trying to create account!');
                     });
             });
     };
@@ -107,15 +107,15 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     async function forgotPassword(email: string) {
         if (!email) {
-            return Alert.alert('Reset Password', 'Informe o E-mail');
+            return Alert.alert('Reset Password', 'E-mail is required!');
         };
         auth()
             .sendPasswordResetEmail(email)
             .then(() => {
-                return Alert.alert('Reset Password', 'Foi enviado um E-mail com o link para redefinição de senha no seu E-mail.');
+                return Alert.alert('Reset Password', 'An E-mail has been sent with the password reset link into your E-mail!');
             })
             .catch(() => {
-                return Alert.alert('Reset Password', 'Não foi possivel enviar o E-mail');
+                return Alert.alert('Reset Password', 'It was not possible to send the email. Try later!');
             });
     };
     useEffect(() => {

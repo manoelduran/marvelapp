@@ -21,7 +21,7 @@ export function Search({ onSearch, onClear, ...rest }: SearchProps) {
         <Container>
             <InputArea>
                 <Input
-                    placeholder='pesquisar...'
+                    placeholder='search here...'
                     {...rest}
                 />
                 <ButtonClear onPress={onClear} >

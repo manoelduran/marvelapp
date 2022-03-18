@@ -35,7 +35,7 @@ export function AdminHome() {
                 setUsers(data);
             })
             .catch(() => {
-                return Alert.alert('Não foi possivel carregar a lista de usuários');
+                return Alert.alert('Load list','Unable to load user list!');
             });
     };
     function handleDelete() {
@@ -63,7 +63,7 @@ export function AdminHome() {
     return (
         <Container>
             <Header>
-                <Title>Marvel Land</Title>
+                <Title>MarvelApp</Title>
                 <LogoutButton onPress={handleSignOut} />
             </Header>
             <Search

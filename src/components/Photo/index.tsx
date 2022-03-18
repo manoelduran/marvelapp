@@ -17,7 +17,7 @@ export function Photo({ uri }: PhotoProps) {
     };
     return (
         <Placeholder>
-            <PlaceholderTitle>Nenhuma foto {'\n'} carregada</PlaceholderTitle>
+            <PlaceholderTitle>No photo {'\n'} uploaded</PlaceholderTitle>
         </Placeholder>
     );
 };

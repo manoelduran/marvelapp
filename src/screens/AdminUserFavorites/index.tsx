@@ -31,7 +31,7 @@ export function AdminUserFavorites() {
                     };
                 }) as Character[];
                 setCharacters(data);
-            }).catch(() => Alert.alert('Lista de favoritos', 'Não foi possivel carregar a lista de favoritos'))
+            }).catch(() => Alert.alert('Favorites List', 'Failed to load favorites list!'))
     };
     useEffect(() => {
         fetchCharacterList();
@@ -42,7 +42,7 @@ export function AdminUserFavorites() {
                 <BackButton
                     onPress={handleBack}
                 />
-                <Title>Lista de favoritos</Title>
+                <Title>Favorites List</Title>
             </Header>
             <FlatList
                 data={characters}

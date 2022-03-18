@@ -29,7 +29,7 @@ export function UserFavorites() {
                     };
                 }) as Character[];
                 setCharacters(data);
-            }).catch(() => Alert.alert('Lista de favoritos', 'Não foi possivel carregar a lista de favoritos'))
+            }).catch(() => Alert.alert('Favorites List', 'Failed to load favorites list!'))
     };
     function handleCharacter(character: Character) {
         navigation.navigate('Character', {
@@ -42,10 +42,10 @@ export function UserFavorites() {
     return (
         <Container>
             <Header>
-            <BackButton
+                <BackButton
                     onPress={handleBack}
                 />
-                <Title>Lista de favoritos</Title>
+                <Title>Favorites List</Title>
             </Header>
             <FlatList
                 data={characters}

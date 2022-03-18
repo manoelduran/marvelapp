@@ -39,7 +39,7 @@ export function AdminUserPage() {
                     .ref(user.photo_path)
                     .delete()
             })
-            .catch(() => Alert.alert('Não foi possivel deletar o usuáriro'));
+            .catch(() => Alert.alert('Unable to delete user!'));
         navigation.navigate('AdminHome');
     };
     function handleAdminUserFavorites(user: User) {
@@ -56,9 +56,9 @@ export function AdminUserPage() {
                 <BackButton
                     onPress={handleBack}
                 />
-                <Title>Marvel Land </Title>
+                <Title>MarvelApp </Title>
                 <Button
-                    title='Deletar Usuário'
+                    title='Delete User'
                     style={{ backgroundColor: 'red' }}
                     onPress={handleDeleteUser}
                 />
@@ -83,13 +83,13 @@ export function AdminUserPage() {
                     <Name>Type:</Name>
                     {
                         selectedUser.isAdmin ?
-                            <Description> Administrador </Description>
+                            <Description> Administrator </Description>
                             :
-                            <Description> Usuário </Description>
+                            <Description> User </Description>
                     }
                 </Info>
                 <Button
-                    title="Favoritos"
+                    title="Favorites"
                     onPress={() => handleAdminUserFavorites(user)}
                     style={{ marginBottom: 15 }}
                 />

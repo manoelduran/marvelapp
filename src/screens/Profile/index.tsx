@@ -43,7 +43,7 @@ export function Profile() {
 
     async function handleAddPhoto() {
         if (!photoView) {
-            return Alert.alert('Cadastro', 'Informe a foto');
+            return Alert.alert('Register', 'Photo is required!');
         };
         setLoading(true);
         const fileName = new Date().getTime();
@@ -66,7 +66,7 @@ export function Profile() {
             })
             .catch(() => {
                 setLoading(false);
-                Alert.alert('Editar Perfil', 'Não foi possivel editar o perfil');
+                Alert.alert('Edit Profile', 'Unable to edit profile!');
             });
     };
     async function handleDeletePhoto() {
@@ -86,7 +86,7 @@ export function Profile() {
                     .ref(photoPath)
                     .delete()
             })
-            .catch(() => Alert.alert('Não foi possivel deletar a foto'));
+            .catch(() => Alert.alert('Could not delete photo!'));
         navigation.navigate('Home');
     };
     function handleFavorites() {
@@ -116,9 +116,9 @@ export function Profile() {
                     <Photo
                         uri={photoView}
                     />
-                    {buttonId === true ? <PickImageButton title='Deletar' onPress={handleDeletePhoto} />
+                    {buttonId === true ? <PickImageButton title='Delete' onPress={handleDeletePhoto} />
                         :
-                        <PickImageButton title='Carregar' onPress={handlePickImage} />
+                        <PickImageButton title='Pick Image' onPress={handlePickImage} />
                     }
                 </Upload>
                 <ItemSeparator />
@@ -135,17 +135,17 @@ export function Profile() {
                         <Name>Type:</Name>
                         {
                             user?.isAdmin ?
-                                <Description> Administrador </Description>
+                                <Description> Administrator </Description>
                                 :
-                                <Description> Usuário </Description>
+                                <Description> User </Description>
                         }
                     </Info>
                     <Button
-                        title="Favoritos"
+                        title="Favorites"
                         onPress={handleFavorites}
                     />
                     {buttonId === false && <AddButton
-                        title="Editar"
+                        title="Edit"
                         isLoading={loading}
                         onPress={handleAddPhoto}
                     />}

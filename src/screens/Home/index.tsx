@@ -51,7 +51,7 @@ export function Home() {
     return (
         <Container>
             <Header>
-                <Title>Marvel Land</Title>
+                <Title>MarvelApp</Title>
                 <LogoutButton onPress={handleSignOut} />
             </Header>
             <Search
