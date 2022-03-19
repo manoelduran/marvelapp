@@ -14,15 +14,7 @@
     ],
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "bundleIdentifier": "com.marvelapp",
-      "buildNumber": "1.0.0"
-    },
-    "android": {
-      "package": "com.marvelapp",
-      "versionCode": 1
-    }
+    ]
   },
   "name": "marvelapp"
 }
