@@ -24,7 +24,6 @@ export function Character() {
     const theme = useTheme();
     const navigation = useNavigation();
     const { character } = route.params as CharacterNavigationProps;
-    const [selectedCharacter, setSelectedCharacter] = useState({} as Character);
     const [favoritedCharacter, setFavoritedCharacter] = useState<Character | undefined>({} as Character);
     function favoriteCharacter() {
         firestore()
@@ -68,11 +67,21 @@ export function Character() {
                 return Alert.alert('Favorites List', 'Unable to remove character from favorites list!');
             });
     };
+
+    function fetchCharacter() {
+        firestore()
+            .collection(`users/${user?.name}/favorites`)
+            .doc(character.name)
+            .get()
+            .then(response => {
+                const data = response.data() as unknown as Character;
+                if (data.id === character.id) {
+                    setFavoritedCharacter(data)
+                }
+            })
+    }
     function handleBack() {
         navigation.goBack();
-    };
-    function fetchCharacter() {
-        setSelectedCharacter(character);
     };
     useEffect(() => {
         fetchCharacter();
@@ -87,9 +96,9 @@ export function Character() {
             </Header>
             <Content>
                 <Thumbnail
-                    source={{ uri: `${selectedCharacter?.thumbnail?.path}/portrait_incredible.${selectedCharacter?.thumbnail?.extension}` }}
+                    source={{ uri: `${character?.thumbnail?.path}/portrait_incredible.${character?.thumbnail?.extension}` }}
                 />
-                <Name> {selectedCharacter.name} </Name>
+                <Name> {character?.name} </Name>
                 {
                     favoritedCharacter?.active ?
                         <Icon name='star' size={30} active={true} onPress={() => removeCharacter()} />
@@ -98,8 +107,8 @@ export function Character() {
                 }
                 <ItemSeparator />
                 {
-                    selectedCharacter.description ?
-                        <Description> {selectedCharacter.description} </Description>
+                    character?.description ?
+                        <Description> {character?.description} </Description>
                         :
                         <Description style={{ textAlign: 'center' }} > not available </Description>
                 }

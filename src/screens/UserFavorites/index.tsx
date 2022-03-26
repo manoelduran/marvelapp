@@ -55,7 +55,7 @@ export function UserFavorites() {
                     <CharacterCard
                         index={index}
                         data={item}
-                        onPress={() => handleCharacter(item)} />
+                        onPress={() => {}} />
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingHorizontal: 24 }}
