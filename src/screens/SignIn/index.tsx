@@ -43,7 +43,7 @@ export function SignIn() {
         <Container>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} >
                 <Content>
-                    <Brand source={brandImg}  />
+                    <Brand source={brandImg}  style={{alignSelf: 'center'}}/>
                     <Title>Login</Title>
                     <Input
                         placeholder="E-mail"

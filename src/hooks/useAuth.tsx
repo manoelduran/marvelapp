@@ -92,8 +92,13 @@ function AuthProvider({ children }: AuthProviderProps) {
                     .then(() => {
                         return Alert.alert('Create Account', 'Account created successfully!');
                     })
-                    .catch(() => {
-                        return Alert.alert('Create Account', 'Error trying to create account!');
+                    .catch((error) => {
+                        const { code } = error;
+                        if (code === 'auth/email-already-in-use') {
+                            return Alert.alert('Login', 'E-mail já cadastrado.');
+                        } else {
+                            return Alert.alert('Create Account', 'Error trying to create account!');
+                        }
                     });
             });
     };

@@ -75,7 +75,7 @@ export function Character() {
             .get()
             .then(response => {
                 const data = response.data() as unknown as Character;
-                if (data.id === character.id) {
+                if (data?.id === character.id) {
                     setFavoritedCharacter(data)
                 }
             })
